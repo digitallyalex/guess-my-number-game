@@ -29,6 +29,12 @@ document.querySelector('.check').addEventListener('click', function () {
   if (!guess) {
     displayMessage('⛔ No Number! Please insert a number between 1 and 20!');
 
+    //input is equal or higher than 21
+  } else if (guess >= 21) {
+    displayMessage(
+      '⛔ Number is too high! Please insert a number between 1 and 20!'
+    );
+
     //input is correct - Player Wins and highscore is logged
   } else if (guess == secretNumber) {
     displayMessage('🎉 Correct Number!');
@@ -50,7 +56,9 @@ document.querySelector('.check').addEventListener('click', function () {
       score--;
       document.querySelector('.score').textContent = score;
     } else {
-      displayMessage('☹️ You lost the game!');
+      displayMessage(
+        '☹️ You lost the game! Please press *Again* to restart the game'
+      );
       document.querySelector('.score').textContent = 0;
     }
   }
