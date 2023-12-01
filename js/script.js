@@ -1,22 +1,15 @@
 'use strict';
 
-/*
-console.log(document.querySelector('.message').textContent);
-document.querySelector('.message').textContent = '🎉 Correct Number!';
-
-document.querySelector('.number').textContent = 13;
-document.querySelector('.score').textContent = 30;
-
-document.querySelector('.guess').value = 23;
-console.log(document.querySelector('.guess').value);
-*/
-
 //selecting a secret random number between 1 and 20 for each game:
 let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
 //sets initial score
 let score = 20;
 
+//sets initial highscore
+let highscore = 0;
+
+//adds event listener to check button
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
   console.log(guess, typeof guess);
@@ -32,7 +25,7 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent =
       '⛔ No Number! Please insert a number between 1 and 20!';
 
-    //input is correct
+    //input is correct - Player Wins and highscore is logged
   } else if (guess == secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct Number!';
     //reveals the secretNumber
@@ -42,6 +35,11 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('body').style.backgroundColor = '#60b347';
     //doubles size of secretNumber container
     document.querySelector('.number').style.width = '30rem';
+
+    if (score > highscore) {
+      highscore = score;
+      document.querySelector('.highscore').textContent = highscore;
+    }
 
     //input is higher than the secretNumber
   } else if (guess > secretNumber) {
