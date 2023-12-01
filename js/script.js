@@ -12,10 +12,10 @@ console.log(document.querySelector('.guess').value);
 */
 
 //selecting a secret random number between 1 and 20 for each game:
-const secretNumber = Math.trunc(Math.random() * 20) + 1;
-let score = 20;
+let secretNumber = Math.trunc(Math.random() * 20) + 1;
 
-document.querySelector('.number').textContent = secretNumber;
+//sets initial score
+let score = 20;
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
@@ -30,11 +30,13 @@ document.querySelector('.check').addEventListener('click', function () {
   //input is null
   if (!guess) {
     document.querySelector('.message').textContent =
-      '⛔No Number! Please insert a number between 1 and 20!';
+      '⛔ No Number! Please insert a number between 1 and 20!';
 
     //input is correct
   } else if (guess == secretNumber) {
     document.querySelector('.message').textContent = '🎉 Correct Number!';
+    //reveals the secretNumber
+    document.querySelector('.number').textContent = secretNumber;
 
     //changes background color
     document.querySelector('body').style.backgroundColor = '#60b347';
@@ -63,4 +65,20 @@ document.querySelector('.check').addEventListener('click', function () {
       document.querySelector('.score').textContent = 0;
     }
   }
+});
+
+document.querySelector('.again').addEventListener('click', function () {
+  //restores initial values of score and secretNumber
+  score = 20;
+  secretNumber = Math.trunc(Math.random() * 20) + 1;
+
+  //restores the initial conditions of message, score, number and guess input fields
+  document.querySelector('.message').textContent = 'Start guessing...';
+  document.querySelector('.score').textContent = score;
+  document.querySelector('.number').textContent = '?';
+  document.querySelector('.guess').value = '';
+
+  //restores the initial body colour and guess box size
+  document.querySelector('body').style.backgroundColor = '#222';
+  document.querySelector('.number').style.width = '15rem';
 });
